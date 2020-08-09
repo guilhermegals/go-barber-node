@@ -23,6 +23,7 @@ routes.post('/sessions', SessionController.create);
 
 routes.get('/providers', authMiddleware, ProviderController.getAll);
 
+routes.get('/appointments', authMiddleware, AppointmentController.getAll);
 routes.post('/appointments', authMiddleware, AppointmentController.create);
 
 routes.post(
