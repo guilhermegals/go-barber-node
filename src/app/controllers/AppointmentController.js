@@ -42,18 +42,18 @@ class AppointmentController {
     }
 
     const checkAvailability = await Appointment.findOne({
-      where: { provider_id, canceled_at: null, date, hourStart },
+      where: { provider_id, canceled_at: null, date: hourStart },
     });
 
-    if (!checkAvailability) {
+    if (checkAvailability) {
       return res
-        .status(401)
+        .status(400)
         .json({ error: 'Appointment date is not available' });
     }
 
     if (req.userId === req.body.provider_id) {
       return res
-        .status(401)
+        .status(400)
         .json({ error: 'Service providers cannot schedule with themselves' });
     }
 
